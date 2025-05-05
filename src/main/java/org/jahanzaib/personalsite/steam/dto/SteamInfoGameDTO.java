@@ -1,6 +1,6 @@
 package org.jahanzaib.personalsite.steam.dto;
 
-public record SteamInfoGame(
+public record SteamInfoGameDTO(
 		String gameName,
 		int playTime,
 		String logoUrlId
