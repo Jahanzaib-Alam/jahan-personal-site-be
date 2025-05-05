@@ -1,4 +1,4 @@
-package org.jahanzaib.personalsite.steam;
+package org.jahanzaib.personalsite;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

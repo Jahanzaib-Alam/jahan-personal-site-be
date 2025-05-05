@@ -2,7 +2,7 @@ package org.jahanzaib.personalsite.steam.converter;
 
 import org.jahanzaib.personalsite.steam.dto.SteamInfoGameDTO;
 import org.jahanzaib.personalsite.steam.dto.SteamInfoResponseDTO;
-import org.jahanzaib.personalsite.steam.dto.steam.SteamGameDTO;
+import org.jahanzaib.personalsite.steam.dto.SteamGameDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

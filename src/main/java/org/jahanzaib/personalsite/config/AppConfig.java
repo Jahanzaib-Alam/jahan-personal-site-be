@@ -1,4 +1,4 @@
-package org.jahanzaib.personalsite.steam.config;
+package org.jahanzaib.personalsite.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

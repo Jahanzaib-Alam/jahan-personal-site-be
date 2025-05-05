@@ -1,5 +1,6 @@
 package org.jahanzaib.personalsite.steam.controller;
 
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import lombok.RequiredArgsConstructor;
 import org.jahanzaib.personalsite.steam.dto.SteamInfoResponseDTO;
 import org.jahanzaib.personalsite.steam.service.SteamInfoService;
@@ -15,6 +16,7 @@ public class SteamInfoController {
 	private final SteamInfoService service;
 
 	@GetMapping("/info")
+	@RateLimiter(name = "steamApiLimiter")
 	public ResponseEntity<SteamInfoResponseDTO> getSteamInfo() {
 		return ResponseEntity.ok(service.getSteamInfo());
 	}

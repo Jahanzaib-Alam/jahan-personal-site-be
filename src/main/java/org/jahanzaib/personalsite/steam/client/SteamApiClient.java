@@ -1,8 +1,8 @@
 package org.jahanzaib.personalsite.steam.client;
 
 import lombok.RequiredArgsConstructor;
-import org.jahanzaib.personalsite.steam.dto.steam.SteamGameDTO;
-import org.jahanzaib.personalsite.steam.dto.steam.SteamRecentlyPlayedResponseDTO;
+import org.jahanzaib.personalsite.steam.dto.SteamGameDTO;
+import org.jahanzaib.personalsite.steam.dto.SteamRecentlyPlayedResponseDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

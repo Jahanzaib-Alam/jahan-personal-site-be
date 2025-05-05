@@ -1,4 +1,4 @@
-package org.jahanzaib.personalsite.steam.dto.steam;
+package org.jahanzaib.personalsite.steam.dto;
 
 import java.util.List;
 
