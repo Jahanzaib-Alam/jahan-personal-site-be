@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class SteamInfoController {
 	private final SteamInfoService service;
 
-	@GetMapping("/info")
 	@RateLimiter(name = "steamApiLimiter")
+	@GetMapping("/info")
 	public ResponseEntity<SteamInfoResponseDTO> getSteamInfo() {
 		return ResponseEntity.ok(service.getSteamInfo());
 	}
