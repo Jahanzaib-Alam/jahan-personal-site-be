@@ -1,0 +1,9 @@
+allowed:
+  origins: http://localhost:5173
+
+resilience4j.ratelimiter:
+  instances:
+    steamApiLimiter:
+      limit-for-period: 1000
+      limit-refresh-period: 1m
+      timeout-duration: 0
