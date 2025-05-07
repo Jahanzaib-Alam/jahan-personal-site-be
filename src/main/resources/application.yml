@@ -7,3 +7,7 @@ resilience4j.ratelimiter:
       limit-for-period: 5
       limit-refresh-period: 1m
       timeout-duration: 0
+
+steam:
+  api-key: <API_KEY>
+  user-id: <USER_ID>
