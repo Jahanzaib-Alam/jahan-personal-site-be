@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/steam")
 @RequiredArgsConstructor
 public class SteamInfoController {
-	private final SteamInfoService service;
+    private final SteamInfoService service;
 
-	@RateLimiter(name = "steamApiLimiter")
-	@GetMapping("/info")
-	public ResponseEntity<SteamInfoResponseDTO> getSteamInfo() {
-		return ResponseEntity.ok(service.getSteamInfo());
-	}
+    @RateLimiter(name = "steamApiLimiter")
+    @GetMapping("/info")
+    public ResponseEntity<SteamInfoResponseDTO> getSteamInfo() {
+        return ResponseEntity.ok(service.getSteamInfo());
+    }
 }
