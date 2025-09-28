@@ -7,7 +7,26 @@ resilience4j.ratelimiter:
       limit-for-period: 5
       limit-refresh-period: 1m
       timeout-duration: 0
+    prayerTimesApiLimiter:
+      limit-for-period: 1000
+      limit-refresh-period: 1m
+      timeout-duration: 0
 
 steam:
   api-key: <API_KEY>
   user-id: <USER_ID>
+
+spring:
+  datasource:
+    url: ${DB_URL:}
+    username: ${DB_USER:}
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
