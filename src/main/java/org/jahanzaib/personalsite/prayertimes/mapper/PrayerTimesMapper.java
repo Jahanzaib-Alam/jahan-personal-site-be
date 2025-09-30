@@ -11,12 +11,12 @@ public class PrayerTimesMapper {
 
     public CurrentPrayerTimesDTO toDto(CurrentPrayerTimes currentTimes) {
         return CurrentPrayerTimesDTO.builder()
-                .todayTimes(toDto(currentTimes.getTodayTimes()))
-                .tomorrowTimes(toDto(currentTimes.getTomorrowTimes()))
+                .todayTimes(toDto(currentTimes.getToday()))
+                .tomorrowTimes(toDto(currentTimes.getTomorrow()))
                 .build();
     }
 
-    private PrayerTimesDTO toDto(PrayerTimes times) {
+    public PrayerTimesDTO toDto(PrayerTimes times) {
         return PrayerTimesDTO.builder()
                 .date(times.getDate())
                 .fajrStart(times.getFajrStart())
