@@ -8,7 +8,7 @@ resilience4j.ratelimiter:
       limit-refresh-period: 1m
       timeout-duration: 0
     prayerTimesApiLimiter:
-      limit-for-period: 1000
+      limit-for-period: 50
       limit-refresh-period: 1m
       timeout-duration: 0
 
