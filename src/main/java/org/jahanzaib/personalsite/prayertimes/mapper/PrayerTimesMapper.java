@@ -11,8 +11,8 @@ public class PrayerTimesMapper {
 
     public CurrentPrayerTimesDTO toDto(CurrentPrayerTimes currentTimes) {
         return CurrentPrayerTimesDTO.builder()
-                .todayTimes(toDto(currentTimes.getToday()))
-                .tomorrowTimes(toDto(currentTimes.getTomorrow()))
+                .today(toDto(currentTimes.getToday()))
+                .tomorrow(toDto(currentTimes.getTomorrow()))
                 .build();
     }
 

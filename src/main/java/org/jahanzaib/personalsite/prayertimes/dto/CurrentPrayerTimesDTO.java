@@ -6,6 +6,6 @@ import lombok.Getter;
 @Builder
 @Getter
 public class CurrentPrayerTimesDTO {
-    private final PrayerTimesDTO todayTimes;
-    private final PrayerTimesDTO tomorrowTimes;
+    private final PrayerTimesDTO today;
+    private final PrayerTimesDTO tomorrow;
 }
