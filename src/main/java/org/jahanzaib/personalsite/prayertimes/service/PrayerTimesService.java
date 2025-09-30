@@ -17,16 +17,19 @@ public class PrayerTimesService {
     private static final int DEFAULT_YEAR = 2024;
 
     public CurrentPrayerTimes getCurrentTimes() {
-        var today = LocalDate.now().withYear(DEFAULT_YEAR);
+        var today = LocalDate.now();
         var tomorrow = today.plusDays(1);
         return CurrentPrayerTimes.builder()
-                .today(dstApplier.applyDaylightSavings(repository.getByDate(today), today))
-                .tomorrow(dstApplier.applyDaylightSavings(repository.getByDate(tomorrow), tomorrow))
+                .today(applyDst(repository.getByDate(today.withYear(DEFAULT_YEAR)), today))
+                .tomorrow(applyDst(repository.getByDate(tomorrow.withYear(DEFAULT_YEAR)), tomorrow))
                 .build();
     }
 
     public PrayerTimes getTimesForDate(LocalDate date) {
-        return dstApplier.applyDaylightSavings(
-                repository.getByDate(date.withYear(DEFAULT_YEAR)), date);
+        return applyDst(repository.getByDate(date.withYear(DEFAULT_YEAR)), date);
+    }
+
+    private PrayerTimes applyDst(PrayerTimes times, LocalDate date) {
+        return dstApplier.applyDaylightSavings(times, date);
     }
 }
