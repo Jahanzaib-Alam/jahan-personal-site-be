@@ -1,7 +1,5 @@
 allowed:
-  origins:
-    - https://jahanzaib.org
-    - https://www.jahanzaib.org
+  origins: https://jahanzaib.org, https://www.jahanzaib.org
 
 resilience4j.ratelimiter:
   instances:
