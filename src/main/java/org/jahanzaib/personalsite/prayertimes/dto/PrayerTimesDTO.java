@@ -20,6 +20,4 @@ public class PrayerTimesDTO {
     private final LocalTime asrJamat;
     private final LocalTime maghribJamat;
     private final LocalTime ishaJamat;
-    private final LocalTime nextStartTime;
-    private final LocalTime nextJamatTime;
 }
