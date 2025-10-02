@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Comparator;
+import java.util.Optional;
+import java.util.stream.Stream;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,4 +31,20 @@ public class PrayerTimes {
     private final LocalTime asrJamat;
     private final LocalTime maghribJamat;
     private final LocalTime ishaJamat;
+
+    public Optional<LocalTime> getNextStartTime() {
+        LocalTime now = LocalTime.now();
+
+        return Stream.of(fajrStart, dhuhrStart, asrStart, maghribStart, ishaStart)
+                .filter(time -> time.isAfter(now))
+                .min(Comparator.naturalOrder());
+    }
+
+    public Optional<LocalTime> getNextJamatTime() {
+        LocalTime now = LocalTime.now();
+
+        return Stream.of(fajrJamat, dhuhrJamat, asrJamat, maghribJamat, ishaJamat)
+                .filter(time -> time.isAfter(now))
+                .min(Comparator.naturalOrder());
+    }
 }

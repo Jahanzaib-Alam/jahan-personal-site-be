@@ -13,6 +13,8 @@ public class PrayerTimesMapper {
         return CurrentPrayerTimesDTO.builder()
                 .today(toDto(currentTimes.getToday()))
                 .tomorrow(toDto(currentTimes.getTomorrow()))
+                .nextStart(currentTimes.getNextStartTime())
+                .nextJamat(currentTimes.getNextJamatTime())
                 .build();
     }
 
