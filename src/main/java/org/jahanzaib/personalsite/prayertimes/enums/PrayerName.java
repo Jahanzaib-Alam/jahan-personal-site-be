@@ -3,7 +3,7 @@ package org.jahanzaib.personalsite.prayertimes.enums;
 public enum PrayerName {
     FAJR("Fajr"),
     SUNRISE("Sunrise"),
-    DHUHR("Zuhr"),
+    DHUHR("Ẓuhr"),
     JUMAH("Jum'ah"),
     ASR("Asr"),
     MAGHRIB("Maghrib"),
