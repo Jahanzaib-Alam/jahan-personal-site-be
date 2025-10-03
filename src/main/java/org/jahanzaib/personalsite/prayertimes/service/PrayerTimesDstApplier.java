@@ -1,6 +1,5 @@
 package org.jahanzaib.personalsite.prayertimes.service;
 
-import java.time.Clock;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.ZoneId;
@@ -11,8 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class PrayerTimesDstApplier {
-
-    private final Clock clock;
 
     public PrayerTimes applyDaylightSavings(PrayerTimes times, LocalDate date) {
         int dstOffset = calculateDstOffset(date);
