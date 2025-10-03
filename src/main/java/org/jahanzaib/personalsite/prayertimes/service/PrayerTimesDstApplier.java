@@ -42,7 +42,7 @@ public class PrayerTimesDstApplier {
                 .build();
     }
 
-    private boolean isDaylightSavings(LocalDate date) {
+    public boolean isDaylightSavings(LocalDate date) {
         var ukZone = ZoneId.of("Europe/London");
         return ukZone.getRules().isDaylightSavings(date.atTime(12, 0).atZone(ukZone).toInstant());
     }

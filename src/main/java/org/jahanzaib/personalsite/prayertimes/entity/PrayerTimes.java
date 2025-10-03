@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PrayerTimes {
     @Id private final Integer id;
+    private final Integer mosqueId;
     private final LocalDate date;
     private final LocalTime fajrStart;
     private final LocalTime sunrise;

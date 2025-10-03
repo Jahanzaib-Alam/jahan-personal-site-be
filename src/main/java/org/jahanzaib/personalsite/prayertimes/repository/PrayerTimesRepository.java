@@ -5,5 +5,5 @@ import org.jahanzaib.personalsite.prayertimes.entity.PrayerTimes;
 import org.springframework.data.repository.Repository;
 
 public interface PrayerTimesRepository extends Repository<PrayerTimes, Integer> {
-    PrayerTimes getByDate(LocalDate date);
+    PrayerTimes getByDateAndMosqueId(LocalDate date, int mosqueId);
 }

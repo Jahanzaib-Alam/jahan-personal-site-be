@@ -1,9 +1,11 @@
 package org.jahanzaib.personalsite.prayertimes.mapper;
 
 import org.jahanzaib.personalsite.prayertimes.dto.CurrentPrayerTimesDTO;
+import org.jahanzaib.personalsite.prayertimes.dto.PrayerDTO;
 import org.jahanzaib.personalsite.prayertimes.dto.PrayerTimesDTO;
-import org.jahanzaib.personalsite.prayertimes.entity.CurrentPrayerTimes;
-import org.jahanzaib.personalsite.prayertimes.entity.PrayerTimes;
+import org.jahanzaib.personalsite.prayertimes.model.CurrentPrayerTimes;
+import org.jahanzaib.personalsite.prayertimes.model.NamedPrayerTimes;
+import org.jahanzaib.personalsite.prayertimes.model.Prayer;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,25 +15,23 @@ public class PrayerTimesMapper {
         return CurrentPrayerTimesDTO.builder()
                 .today(toDto(currentTimes.getToday()))
                 .tomorrow(toDto(currentTimes.getTomorrow()))
-                .nextStart(currentTimes.getNextStartTime())
-                .nextJamat(currentTimes.getNextJamatTime())
+                .nextStart(toDto(currentTimes.getNextStart()))
+                .nextJamat(toDto(currentTimes.getNextJamat()))
                 .build();
     }
 
-    public PrayerTimesDTO toDto(PrayerTimes times) {
+    public PrayerTimesDTO toDto(NamedPrayerTimes times) {
         return PrayerTimesDTO.builder()
                 .date(times.getDate())
-                .fajrStart(times.getFajrStart())
-                .sunrise(times.getSunrise())
-                .dhuhrStart(times.getDhuhrStart())
-                .asrStart(times.getAsrStart())
-                .maghribStart(times.getMaghribStart())
-                .ishaStart(times.getIshaStart())
-                .fajrJamat(times.getFajrJamat())
-                .dhuhrJamat(times.getDhuhrJamat())
-                .asrJamat(times.getAsrJamat())
-                .maghribJamat(times.getMaghribJamat())
-                .ishaJamat(times.getIshaJamat())
+                .prayers(times.getPrayers().stream().map(this::toDto).toList())
+                .build();
+    }
+
+    private PrayerDTO toDto(Prayer prayer) {
+        return PrayerDTO.builder()
+                .name(prayer.getName())
+                .start(prayer.getStart())
+                .jamat(prayer.getJamat())
                 .build();
     }
 }

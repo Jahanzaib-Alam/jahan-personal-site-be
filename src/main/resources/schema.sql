@@ -1,15 +1,26 @@
+CREATE TABLE mosque (
+	id INT NOT NULL AUTO_INCREMENT,
+	name varchar(100) NOT NULL,
+	jumah_time time NOT NULL,
+	jumah_time_dst time NOT NULL,
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE prayer_times (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  date DATE NOT NULL,
-  fajr_start TIME NOT NULL,
-  sunrise TIME NOT NULL,
-  dhuhr_start TIME NOT NULL,
-  asr_start TIME NOT NULL,
-  maghrib_start TIME NOT NULL,
-  isha_start TIME NOT NULL,
-  fajr_jamat TIME NOT NULL,
-  dhuhr_jamat TIME NOT NULL,
-  asr_jamat TIME NOT NULL,
-  maghrib_jamat TIME NOT NULL,
-  isha_jamat TIME NOT NULL
+  id int NOT NULL AUTO_INCREMENT,
+  mosque_id int NOT NULL,
+  date date NOT NULL,
+  fajr_start time NOT NULL,
+  sunrise time NOT NULL,
+  dhuhr_start time NOT NULL,
+  asr_start time NOT NULL,
+  maghrib_start time NOT NULL,
+  isha_start time NOT NULL,
+  fajr_jamat time NOT NULL,
+  dhuhr_jamat time NOT NULL,
+  asr_jamat time NOT NULL,
+  maghrib_jamat time NOT NULL,
+  isha_jamat time NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (mosque_id) REFERENCES mosque(id)
 );

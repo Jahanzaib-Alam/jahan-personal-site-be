@@ -22,14 +22,15 @@ public class PrayerTimesController {
     private final PrayerTimesMapper mapper;
 
     @RateLimiter(name = "prayerTimesApiLimiter")
-    @GetMapping("/current")
-    public ResponseEntity<CurrentPrayerTimesDTO> getCurrentTimes() {
-        return ResponseEntity.ok(mapper.toDto(service.getCurrentTimes()));
+    @GetMapping("/current/{mosqueId}")
+    public ResponseEntity<CurrentPrayerTimesDTO> getCurrentTimes(@PathVariable int mosqueId) {
+        return ResponseEntity.ok(mapper.toDto(service.getCurrentTimes(mosqueId)));
     }
 
     @RateLimiter(name = "prayerTimesApiLimiter")
-    @GetMapping("/{date}")
-    public ResponseEntity<PrayerTimesDTO> getTimesForDate(@PathVariable LocalDate date) {
-        return ResponseEntity.ok(mapper.toDto(service.getTimesForDate(date)));
+    @GetMapping("/{mosqueId}/{date}")
+    public ResponseEntity<PrayerTimesDTO> getTimesForDate(
+            @PathVariable int mosqueId, @PathVariable LocalDate date) {
+        return ResponseEntity.ok(mapper.toDto(service.getTimesForDate(mosqueId, date)));
     }
 }
