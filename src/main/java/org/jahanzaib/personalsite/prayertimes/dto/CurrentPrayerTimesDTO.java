@@ -11,5 +11,5 @@ public class CurrentPrayerTimesDTO {
     private final PrayerDTO nextStart;
     private final PrayerDTO nextJamat;
     private final boolean jamatsChangingTomorrow;
-	private final String prayerApiVersion;
+    private final String prayerApiVersion;
 }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PrayerTimesMapper {
 
-	private static final String PRAYER_API_VERSION = "1.0.0";
+    private static final String PRAYER_API_VERSION = "1.0.0";
 
     public CurrentPrayerTimesDTO toDto(CurrentPrayerTimes currentTimes) {
         var todayTimes = toDto(currentTimes.getToday(), currentTimes.getTomorrow());
@@ -25,7 +25,7 @@ public class PrayerTimesMapper {
                 .nextJamat(toDto(currentTimes.getNextJamat()))
                 .jamatsChangingTomorrow(
                         tomorrowTimes.getPrayers().stream().anyMatch(PrayerDTO::isJamatChanging))
-				.prayerApiVersion(PRAYER_API_VERSION)
+                .prayerApiVersion(PRAYER_API_VERSION)
                 .build();
     }
 
