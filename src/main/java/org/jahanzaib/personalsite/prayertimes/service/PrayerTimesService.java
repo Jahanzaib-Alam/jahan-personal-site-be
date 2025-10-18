@@ -48,28 +48,32 @@ public class PrayerTimesService {
         var fajr =
                 Prayer.builder()
                         .name(PrayerName.FAJR)
-                        .start(times.getFajrStart())
-                        .jamat(times.getFajrJamat())
+                        .start(times.getFajrStart().atDate(date))
+                        .jamat(times.getFajrJamat().atDate(date))
                         .build();
-        var sunrise = Prayer.builder().name(PrayerName.SUNRISE).start(times.getSunrise()).build();
+        var sunrise =
+                Prayer.builder()
+                        .name(PrayerName.SUNRISE)
+                        .start(times.getSunrise().atDate(date))
+                        .build();
         var dhuhr = getDhuhr(date, times);
         var asr =
                 Prayer.builder()
                         .name(PrayerName.ASR)
-                        .start(times.getAsrStart())
-                        .jamat(times.getAsrJamat())
+                        .start(times.getAsrStart().atDate(date))
+                        .jamat(times.getAsrJamat().atDate(date))
                         .build();
         var maghrib =
                 Prayer.builder()
                         .name(PrayerName.MAGHRIB)
-                        .start(times.getMaghribStart())
-                        .jamat(times.getMaghribJamat())
+                        .start(times.getMaghribStart().atDate(date))
+                        .jamat(times.getMaghribJamat().atDate(date))
                         .build();
         var isha =
                 Prayer.builder()
                         .name(PrayerName.ISHA)
-                        .start(times.getIshaStart())
-                        .jamat(times.getIshaJamat())
+                        .start(times.getIshaStart().atDate(date))
+                        .jamat(times.getIshaJamat().atDate(date))
                         .build();
         return NamedPrayerTimes.builder()
                 .date(times.getDate())
@@ -82,8 +86,8 @@ public class PrayerTimesService {
         if (!isFriday) {
             return Prayer.builder()
                     .name(PrayerName.DHUHR)
-                    .start(times.getDhuhrStart())
-                    .jamat(times.getDhuhrJamat())
+                    .start(times.getDhuhrStart().atDate(date))
+                    .jamat(times.getDhuhrJamat().atDate(date))
                     .build();
         }
         var mosque = mosqueRepository.getById(times.getMosqueId());
@@ -93,8 +97,8 @@ public class PrayerTimesService {
                         : mosque.getJumahTime();
         return Prayer.builder()
                 .name(PrayerName.JUMAH)
-                .start(times.getDhuhrStart())
-                .jamat(fridayJamatTime)
+                .start(times.getDhuhrStart().atDate(date))
+                .jamat(fridayJamatTime.atDate(date))
                 .build();
     }
 }

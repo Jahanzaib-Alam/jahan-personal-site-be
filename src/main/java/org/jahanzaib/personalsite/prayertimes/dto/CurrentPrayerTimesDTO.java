@@ -10,4 +10,5 @@ public class CurrentPrayerTimesDTO {
     private final PrayerTimesDTO tomorrow;
     private final PrayerDTO nextStart;
     private final PrayerDTO nextJamat;
+    private final boolean jamatsChangingTomorrow;
 }

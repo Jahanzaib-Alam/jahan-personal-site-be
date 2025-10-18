@@ -17,14 +17,14 @@ public class NamedPrayerTimes {
 
     public Optional<Prayer> getNextStart() {
         return prayers.stream()
-                .filter(prayer -> prayer.getStart().isAfter(TimeUtil.nowUk()))
+                .filter(prayer -> prayer.getStart().toLocalTime().isAfter(TimeUtil.nowUk()))
                 .min(Comparator.comparing(Prayer::getStart));
     }
 
     public Optional<Prayer> getNextJamat() {
         return prayers.stream()
                 .filter(prayer -> !PrayerName.SUNRISE.equals(prayer.getName()))
-                .filter(prayer -> prayer.getJamat().isAfter(TimeUtil.nowUk()))
+                .filter(prayer -> prayer.getJamat().toLocalTime().isAfter(TimeUtil.nowUk()))
                 .min(Comparator.comparing(Prayer::getJamat));
     }
 

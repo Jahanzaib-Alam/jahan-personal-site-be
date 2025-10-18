@@ -1,6 +1,6 @@
 package org.jahanzaib.personalsite.prayertimes.dto;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
 import org.jahanzaib.personalsite.prayertimes.enums.PrayerName;
@@ -9,6 +9,7 @@ import org.jahanzaib.personalsite.prayertimes.enums.PrayerName;
 @Getter
 public class PrayerDTO {
     private final PrayerName name;
-    private final LocalTime start;
-    private final LocalTime jamat;
+    private final LocalDateTime start;
+    private final LocalDateTime jamat;
+    private final boolean jamatChanging;
 }
