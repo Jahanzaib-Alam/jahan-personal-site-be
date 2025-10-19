@@ -11,6 +11,7 @@ import org.jahanzaib.personalsite.prayertimes.model.NamedPrayerTimes;
 import org.jahanzaib.personalsite.prayertimes.model.Prayer;
 import org.jahanzaib.personalsite.prayertimes.repository.MosqueRepository;
 import org.jahanzaib.personalsite.prayertimes.repository.PrayerTimesRepository;
+import org.jahanzaib.personalsite.util.TimeUtil;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,7 +25,7 @@ public class PrayerTimesService {
     private static final int DEFAULT_YEAR = 2024;
 
     public CurrentPrayerTimes getCurrentTimes(int mosqueId) {
-        var today = LocalDate.now();
+        var today = TimeUtil.nowDateUk();
         var tomorrow = today.plusDays(1);
         return CurrentPrayerTimes.builder()
                 .today(getTimesForDate(mosqueId, today))
