@@ -28,7 +28,7 @@ public class PrayerTimesDstApplier {
     }
 
     private PrayerTimes applyDaylightSavings(PrayerTimes times, int dstOffset) {
-        return PrayerTimes.builder()
+        return times.toBuilder()
                 .date(times.getDate())
                 .fajrStart(times.getFajrStart().plusHours(dstOffset))
                 .sunrise(times.getSunrise().plusHours(dstOffset))
