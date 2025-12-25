@@ -1,6 +1,6 @@
 INSERT INTO mosque (id, name, jumah_time, jumah_time_dst) VALUES(1, 'Jamia Rasooliah', '12:30:00', '13:30:00');
-INSERT INTO mosque (id, name, jumah_time, jumah_time_dst) VALUES(2, 'BMHC', '13:30:00', '12:45:00');
-INSERT INTO mosque (id, name, jumah_time, jumah_time_dst) VALUES(3, 'Hidayah', '13:30:00', '12:35:00');
+INSERT INTO mosque (id, name, jumah_time, jumah_time_dst) VALUES(2, 'BMHC', '12:45:00', '13:30:00');
+INSERT INTO mosque (id, name, jumah_time, jumah_time_dst) VALUES(3, 'Hidayah', '12:35:00', '13:30:00');
 
 INSERT INTO prayer_times (mosque_id, `date`, fajr_start, sunrise, dhuhr_start, asr_start, maghrib_start, isha_start, fajr_jamat, dhuhr_jamat, asr_jamat, maghrib_jamat, isha_jamat) VALUES(1, '2024-01-01', '06:15:00', '08:24:00', '12:23:00', '14:17:00', '16:04:00', '18:10:00', '07:00:00', '13:00:00', '14:50:00', '16:04:00', '19:00:00');
 INSERT INTO prayer_times (mosque_id, `date`, fajr_start, sunrise, dhuhr_start, asr_start, maghrib_start, isha_start, fajr_jamat, dhuhr_jamat, asr_jamat, maghrib_jamat, isha_jamat) VALUES(1, '2024-01-02', '06:15:00', '08:24:00', '12:23:00', '14:18:00', '16:06:00', '18:11:00', '07:00:00', '13:00:00', '14:50:00', '16:06:00', '19:00:00');
