@@ -13,58 +13,57 @@ import software.amazon.awssdk.services.sns.model.PublishRequest;
 
 public class AwsLogAppender extends AppenderBase<ILoggingEvent> {
 
-    @Setter private String topicArn;
-    @Setter private String snsRegion;
-    @Setter private int maxMessageLength;
+  @Setter private String topicArn;
+  @Setter private String snsRegion;
+  @Setter private int maxMessageLength;
 
-    private SnsClient snsClient;
+  private SnsClient snsClient;
 
-    @Override
-    public void start() {
-        if (hasText(topicArn)) {
-            snsClient = SnsClient.builder().region(Region.of(snsRegion)).build();
-        }
-        super.start();
+  @Override
+  public void start() {
+    if (hasText(topicArn)) {
+      snsClient = SnsClient.builder().region(Region.of(snsRegion)).build();
     }
+    super.start();
+  }
 
-    @Override
-    protected void append(ILoggingEvent event) {
-        if (snsClient == null || !event.getLevel().isGreaterOrEqual(ERROR)) {
-            return;
-        }
-        snsClient.publish(
-                PublishRequest.builder()
-                        .topicArn(topicArn)
-                        .subject("App ERROR: " + event.getLoggerName())
-                        .message(buildMessage(event))
-                        .build());
+  @Override
+  protected void append(ILoggingEvent event) {
+    if (snsClient == null || !event.getLevel().isGreaterOrEqual(ERROR)) {
+      return;
     }
+    snsClient.publish(
+        PublishRequest.builder()
+            .topicArn(topicArn)
+            .subject("App ERROR: " + event.getLoggerName())
+            .message(buildMessage(event))
+            .build());
+  }
 
-    private String buildMessage(ILoggingEvent event) {
-        var messageBuilder =
-                new StringBuilder()
-                        .append(String.format("Logger: %s\n", event.getLoggerName()))
-                        .append(String.format("Thread: %s\n", event.getThreadName()))
-                        .append(String.format("Message: %s\n", event.getFormattedMessage()));
+  private String buildMessage(ILoggingEvent event) {
+    var messageBuilder =
+        new StringBuilder()
+            .append(String.format("Logger: %s\n", event.getLoggerName()))
+            .append(String.format("Thread: %s\n", event.getThreadName()))
+            .append(String.format("Message: %s\n", event.getFormattedMessage()));
 
-        var throwableProxy = event.getThrowableProxy();
-        if (throwableProxy != null) {
-            messageBuilder.append(
-                    String.format(
-                            "\nStacktrace: %s\n", ThrowableProxyUtil.asString(throwableProxy)));
-        }
-        var message = messageBuilder.toString();
-        if (message.length() > maxMessageLength) {
-            message = message.substring(0, maxMessageLength) + "\n...[truncated]";
-        }
-        return message;
+    var throwableProxy = event.getThrowableProxy();
+    if (throwableProxy != null) {
+      messageBuilder.append(
+          String.format("\nStacktrace: %s\n", ThrowableProxyUtil.asString(throwableProxy)));
     }
-
-    @Override
-    public void stop() {
-        if (snsClient != null) {
-            snsClient.close();
-        }
-        super.stop();
+    var message = messageBuilder.toString();
+    if (message.length() > maxMessageLength) {
+      message = message.substring(0, maxMessageLength) + "\n...[truncated]";
     }
+    return message;
+  }
+
+  @Override
+  public void stop() {
+    if (snsClient != null) {
+      snsClient.close();
+    }
+    super.stop();
+  }
 }

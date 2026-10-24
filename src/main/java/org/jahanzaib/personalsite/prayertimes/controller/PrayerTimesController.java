@@ -18,19 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PrayerTimesController {
 
-    private final PrayerTimesService service;
-    private final PrayerTimesMapper mapper;
+  private final PrayerTimesService service;
+  private final PrayerTimesMapper mapper;
 
-    @RateLimiter(name = "prayerTimesApiLimiter")
-    @GetMapping("/current/{mosqueId}")
-    public ResponseEntity<CurrentPrayerTimesDTO> getCurrentTimes(@PathVariable int mosqueId) {
-        return ResponseEntity.ok(mapper.toDto(service.getCurrentTimes(mosqueId)));
-    }
+  @RateLimiter(name = "prayerTimesApiLimiter")
+  @GetMapping("/current/{mosqueId}")
+  public ResponseEntity<CurrentPrayerTimesDTO> getCurrentTimes(@PathVariable int mosqueId) {
+    return ResponseEntity.ok(mapper.toDto(service.getCurrentTimes(mosqueId)));
+  }
 
-    @RateLimiter(name = "prayerTimesApiLimiter")
-    @GetMapping("/{mosqueId}/{date}")
-    public ResponseEntity<PrayerTimesDTO> getTimesForDate(
-            @PathVariable int mosqueId, @PathVariable LocalDate date) {
-        return ResponseEntity.ok(mapper.toDto(service.getTimesForDate(mosqueId, date)));
-    }
+  @RateLimiter(name = "prayerTimesApiLimiter")
+  @GetMapping("/{mosqueId}/{date}")
+  public ResponseEntity<PrayerTimesDTO> getTimesForDate(
+      @PathVariable int mosqueId, @PathVariable LocalDate date) {
+    return ResponseEntity.ok(mapper.toDto(service.getTimesForDate(mosqueId, date)));
+  }
 }

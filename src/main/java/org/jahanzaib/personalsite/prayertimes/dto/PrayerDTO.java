@@ -8,8 +8,8 @@ import org.jahanzaib.personalsite.prayertimes.enums.PrayerName;
 @Builder
 @Getter
 public class PrayerDTO {
-    private final PrayerName name;
-    private final LocalDateTime start;
-    private final LocalDateTime jamat;
-    private final boolean jamatChanging;
+  private final PrayerName name;
+  private final LocalDateTime start;
+  private final LocalDateTime jamat;
+  private final boolean jamatChanging;
 }

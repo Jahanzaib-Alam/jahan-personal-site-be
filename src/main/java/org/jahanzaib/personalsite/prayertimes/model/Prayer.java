@@ -8,7 +8,7 @@ import org.jahanzaib.personalsite.prayertimes.enums.PrayerName;
 @Builder
 @Getter
 public class Prayer {
-    private final PrayerName name;
-    private final LocalDateTime start;
-    private final LocalDateTime jamat;
+  private final PrayerName name;
+  private final LocalDateTime start;
+  private final LocalDateTime jamat;
 }

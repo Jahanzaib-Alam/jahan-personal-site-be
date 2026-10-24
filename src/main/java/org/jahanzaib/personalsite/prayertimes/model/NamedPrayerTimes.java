@@ -12,26 +12,26 @@ import org.jahanzaib.personalsite.util.TimeUtil;
 @Builder
 @Getter
 public class NamedPrayerTimes {
-    private final LocalDate date;
-    private final List<Prayer> prayers;
+  private final LocalDate date;
+  private final List<Prayer> prayers;
 
-    public Optional<Prayer> getNextStart() {
-        return prayers.stream()
-                .filter(prayer -> prayer.getStart().toLocalTime().isAfter(TimeUtil.nowUk()))
-                .min(Comparator.comparing(Prayer::getStart));
-    }
+  public Optional<Prayer> getNextStart() {
+    return prayers.stream()
+        .filter(prayer -> prayer.getStart().toLocalTime().isAfter(TimeUtil.nowUk()))
+        .min(Comparator.comparing(Prayer::getStart));
+  }
 
-    public Optional<Prayer> getNextJamat() {
-        return prayers.stream()
-                .filter(prayer -> !PrayerName.SUNRISE.equals(prayer.getName()))
-                .filter(prayer -> prayer.getJamat().toLocalTime().isAfter(TimeUtil.nowUk()))
-                .min(Comparator.comparing(Prayer::getJamat));
-    }
+  public Optional<Prayer> getNextJamat() {
+    return prayers.stream()
+        .filter(prayer -> !PrayerName.SUNRISE.equals(prayer.getName()))
+        .filter(prayer -> prayer.getJamat().toLocalTime().isAfter(TimeUtil.nowUk()))
+        .min(Comparator.comparing(Prayer::getJamat));
+  }
 
-    public Prayer getFajr() {
-        return prayers.stream()
-                .filter(prayer -> PrayerName.FAJR.equals(prayer.getName()))
-                .findFirst()
-                .orElse(null);
-    }
+  public Prayer getFajr() {
+    return prayers.stream()
+        .filter(prayer -> PrayerName.FAJR.equals(prayer.getName()))
+        .findFirst()
+        .orElse(null);
+  }
 }

@@ -14,8 +14,8 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor(force = true)
 @RequiredArgsConstructor
 public class Mosque {
-    @Id private final Integer id;
-    private final String name;
-    private final LocalTime jumahTime;
-    private final LocalTime jumahTimeDst;
+  @Id private final Integer id;
+  private final String name;
+  private final LocalTime jumahTime;
+  private final LocalTime jumahTimeDst;
 }

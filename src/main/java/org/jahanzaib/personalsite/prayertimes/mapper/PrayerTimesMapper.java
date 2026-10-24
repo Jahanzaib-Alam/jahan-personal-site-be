@@ -13,66 +13,63 @@ import org.springframework.stereotype.Component;
 @Component
 public class PrayerTimesMapper {
 
-    private static final String PRAYER_API_VERSION = "1.0.0";
+  private static final String PRAYER_API_VERSION = "1.0.0";
 
-    public CurrentPrayerTimesDTO toDto(CurrentPrayerTimes currentTimes) {
-        var todayTimes = toDto(currentTimes.getToday(), currentTimes.getTomorrow());
-        var tomorrowTimes = toDto(currentTimes.getTomorrow(), currentTimes.getToday());
-        return CurrentPrayerTimesDTO.builder()
-                .today(todayTimes)
-                .tomorrow(tomorrowTimes)
-                .nextStart(toDto(currentTimes.getNextStart()))
-                .nextJamat(toDto(currentTimes.getNextJamat()))
-                .jamatsChangingTomorrow(
-                        tomorrowTimes.getPrayers().stream().anyMatch(PrayerDTO::isJamatChanging))
-                .prayerApiVersion(PRAYER_API_VERSION)
-                .build();
-    }
+  public CurrentPrayerTimesDTO toDto(CurrentPrayerTimes currentTimes) {
+    var todayTimes = toDto(currentTimes.getToday(), currentTimes.getTomorrow());
+    var tomorrowTimes = toDto(currentTimes.getTomorrow(), currentTimes.getToday());
+    return CurrentPrayerTimesDTO.builder()
+        .today(todayTimes)
+        .tomorrow(tomorrowTimes)
+        .nextStart(toDto(currentTimes.getNextStart()))
+        .nextJamat(toDto(currentTimes.getNextJamat()))
+        .jamatsChangingTomorrow(
+            tomorrowTimes.getPrayers().stream().anyMatch(PrayerDTO::isJamatChanging))
+        .prayerApiVersion(PRAYER_API_VERSION)
+        .build();
+  }
 
-    public PrayerTimesDTO toDto(NamedPrayerTimes times) {
-        return PrayerTimesDTO.builder()
-                .date(times.getDate())
-                .prayers(times.getPrayers().stream().map(this::toDto).toList())
-                .build();
-    }
+  public PrayerTimesDTO toDto(NamedPrayerTimes times) {
+    return PrayerTimesDTO.builder()
+        .date(times.getDate())
+        .prayers(times.getPrayers().stream().map(this::toDto).toList())
+        .build();
+  }
 
-    private PrayerTimesDTO toDto(NamedPrayerTimes times, NamedPrayerTimes otherDayTimes) {
-        return PrayerTimesDTO.builder()
-                .date(times.getDate())
-                .prayers(
-                        times.getPrayers().stream()
-                                .map(prayer -> toDto(prayer, otherDayTimes))
-                                .toList())
-                .build();
-    }
+  private PrayerTimesDTO toDto(NamedPrayerTimes times, NamedPrayerTimes otherDayTimes) {
+    return PrayerTimesDTO.builder()
+        .date(times.getDate())
+        .prayers(times.getPrayers().stream().map(prayer -> toDto(prayer, otherDayTimes)).toList())
+        .build();
+  }
 
-    private PrayerDTO toDto(Prayer prayer, NamedPrayerTimes otherTimes) {
-        return PrayerDTO.builder()
-                .name(prayer.getName())
-                .start(prayer.getStart())
-                .jamat(prayer.getJamat())
-                .jamatChanging(isJamatChanging(prayer, otherTimes))
-                .build();
-    }
+  private PrayerDTO toDto(Prayer prayer, NamedPrayerTimes otherTimes) {
+    return PrayerDTO.builder()
+        .name(prayer.getName())
+        .start(prayer.getStart())
+        .jamat(prayer.getJamat())
+        .jamatChanging(isJamatChanging(prayer, otherTimes))
+        .build();
+  }
 
-    private Boolean isJamatChanging(Prayer prayer, NamedPrayerTimes otherTimes) {
-        return otherTimes.getPrayers().stream()
-                .filter(
-                        todayPrayer ->
-                                todayPrayer.getName().equals(prayer.getName())
-                                        && !prayer.getName().equals(PrayerName.MAGHRIB))
-                .findFirst()
-                .map(Prayer::getJamat)
-                .map(LocalDateTime::toLocalTime)
-                .map(jamat -> !jamat.equals(prayer.getJamat().toLocalTime()))
-                .orElse(false);
-    }
+  private Boolean isJamatChanging(Prayer prayer, NamedPrayerTimes otherTimes) {
+    return otherTimes.getPrayers().stream()
+        .filter(
+            todayPrayer ->
+                todayPrayer.getName().equals(prayer.getName())
+                    && !prayer.getName().equals(PrayerName.MAGHRIB))
+        .findFirst()
+        .map(Prayer::getJamat)
+        .map(LocalDateTime::toLocalTime)
+        .map(jamat -> !jamat.equals(prayer.getJamat().toLocalTime()))
+        .orElse(false);
+  }
 
-    private PrayerDTO toDto(Prayer prayer) {
-        return PrayerDTO.builder()
-                .name(prayer.getName())
-                .start(prayer.getStart())
-                .jamat(prayer.getJamat())
-                .build();
-    }
+  private PrayerDTO toDto(Prayer prayer) {
+    return PrayerDTO.builder()
+        .name(prayer.getName())
+        .start(prayer.getStart())
+        .jamat(prayer.getJamat())
+        .build();
+  }
 }

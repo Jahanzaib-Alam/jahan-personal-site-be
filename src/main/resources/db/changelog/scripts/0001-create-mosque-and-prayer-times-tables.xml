@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="0001-create-mosque-and-prayer-times-tables" author="Jahanzaib-Alam">
+        <createTable tableName="mosque">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jumah_time" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jumah_time_dst" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="prayer_times">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="mosque_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fajr_start" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sunrise" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dhuhr_start" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="asr_start" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="maghrib_start" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isha_start" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fajr_jamat" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dhuhr_jamat" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="asr_jamat" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="maghrib_jamat" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isha_jamat" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseColumnNames="mosque_id"
+                baseTableName="prayer_times"
+                constraintName="fk_mosque"
+                referencedColumnNames="id"
+                referencedTableName="mosque"
+                onDelete="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>

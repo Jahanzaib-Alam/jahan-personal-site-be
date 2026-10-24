@@ -1,22 +1,22 @@
 package org.jahanzaib.personalsite.prayertimes.enums;
 
 public enum PrayerName {
-    FAJR("Fajr"),
-    SUNRISE("Sunrise"),
-    DHUHR("Ẓuhr"),
-    JUMAH("Jum'ah"),
-    ASR("Asr"),
-    MAGHRIB("Maghrib"),
-    ISHA("Isha");
+  FAJR("Fajr"),
+  SUNRISE("Sunrise"),
+  DHUHR("Ẓuhr"),
+  JUMAH("Jum'ah"),
+  ASR("Asr"),
+  MAGHRIB("Maghrib"),
+  ISHA("Isha");
 
-    private final String name;
+  private final String name;
 
-    PrayerName(String name) {
-        this.name = name;
-    }
+  PrayerName(String name) {
+    this.name = name;
+  }
 
-    @Override
-    public String toString() {
-        return name;
-    }
+  @Override
+  public String toString() {
+    return name;
+  }
 }

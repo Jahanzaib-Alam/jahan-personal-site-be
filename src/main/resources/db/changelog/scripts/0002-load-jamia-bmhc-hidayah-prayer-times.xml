@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="0002-load-jamia-bmhc-hidayah-prayer-times" author="Jahanzaib-Alam">
+        <loadData
+                tableName="mosque"
+                file="db/csv-data/mosques-jamia-bmhc-hidayah.csv"
+                encoding="UTF-8"/>
+        <loadData
+                tableName="prayer_times"
+                file="db/csv-data/prayer-times-jamia.csv"
+                encoding="UTF-8"/>
+        <loadData
+                tableName="prayer_times"
+                file="db/csv-data/prayer-times-bmhc.csv"
+                encoding="UTF-8"/>
+        <loadData
+                tableName="prayer_times"
+                file="db/csv-data/prayer-times-hidayah.csv"
+                encoding="UTF-8"/>
+    </changeSet>
+
+</databaseChangeLog>

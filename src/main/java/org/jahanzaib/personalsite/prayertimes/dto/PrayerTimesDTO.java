@@ -8,6 +8,6 @@ import lombok.Getter;
 @Builder
 @Getter
 public class PrayerTimesDTO {
-    private final LocalDate date;
-    private final List<PrayerDTO> prayers;
+  private final LocalDate date;
+  private final List<PrayerDTO> prayers;
 }

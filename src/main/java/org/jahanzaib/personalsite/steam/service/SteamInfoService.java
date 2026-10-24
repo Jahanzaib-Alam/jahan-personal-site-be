@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SteamInfoService {
 
-    private final SteamApiClient steamClient;
-    private final SteamInfoConverter steamInfoConverter;
+  private final SteamApiClient steamClient;
+  private final SteamInfoConverter steamInfoConverter;
 
-    public SteamInfoResponseDTO getSteamInfo() {
-        var recentlyPlayedGames = steamClient.getRecentlyPlayedGames();
-        return recentlyPlayedGames
-                .map(steamInfoConverter::steamGamesToInfoResponse)
-                .orElse(new SteamInfoResponseDTO(Collections.emptyList()));
-    }
+  public SteamInfoResponseDTO getSteamInfo() {
+    var recentlyPlayedGames = steamClient.getRecentlyPlayedGames();
+    return recentlyPlayedGames
+        .map(steamInfoConverter::steamGamesToInfoResponse)
+        .orElse(new SteamInfoResponseDTO(Collections.emptyList()));
+  }
 }

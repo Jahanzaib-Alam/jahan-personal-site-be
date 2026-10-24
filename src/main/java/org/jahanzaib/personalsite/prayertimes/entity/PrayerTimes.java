@@ -15,18 +15,18 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor(force = true)
 @RequiredArgsConstructor
 public class PrayerTimes {
-    @Id private final Integer id;
-    private final Integer mosqueId;
-    private final LocalDate date;
-    private final LocalTime fajrStart;
-    private final LocalTime sunrise;
-    private final LocalTime dhuhrStart;
-    private final LocalTime asrStart;
-    private final LocalTime maghribStart;
-    private final LocalTime ishaStart;
-    private final LocalTime fajrJamat;
-    private final LocalTime dhuhrJamat;
-    private final LocalTime asrJamat;
-    private final LocalTime maghribJamat;
-    private final LocalTime ishaJamat;
+  @Id private final Integer id;
+  private final Integer mosqueId;
+  private final LocalDate date;
+  private final LocalTime fajrStart;
+  private final LocalTime sunrise;
+  private final LocalTime dhuhrStart;
+  private final LocalTime asrStart;
+  private final LocalTime maghribStart;
+  private final LocalTime ishaStart;
+  private final LocalTime fajrJamat;
+  private final LocalTime dhuhrJamat;
+  private final LocalTime asrJamat;
+  private final LocalTime maghribJamat;
+  private final LocalTime ishaJamat;
 }
