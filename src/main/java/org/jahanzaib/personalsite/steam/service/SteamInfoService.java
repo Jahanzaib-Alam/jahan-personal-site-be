@@ -1,6 +1,5 @@
 package org.jahanzaib.personalsite.steam.service;
 
-import java.util.Collections;
 import lombok.RequiredArgsConstructor;
 import org.jahanzaib.personalsite.steam.client.SteamApiClient;
 import org.jahanzaib.personalsite.steam.converter.SteamInfoConverter;
@@ -18,6 +17,6 @@ public class SteamInfoService {
     var recentlyPlayedGames = steamClient.getRecentlyPlayedGames();
     return recentlyPlayedGames
         .map(steamInfoConverter::steamGamesToInfoResponse)
-        .orElse(new SteamInfoResponseDTO(Collections.emptyList()));
+        .orElseGet(() -> SteamInfoResponseDTO.builder().games(java.util.List.of()).build());
   }
 }
