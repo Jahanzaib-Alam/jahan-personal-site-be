@@ -1,10 +1,11 @@
 package org.jahanzaib.personalsite.steam;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import tools.jackson.databind.ObjectMapper;
 import java.util.List;
 import org.jahanzaib.personalsite.steam.dto.SteamInfoGameDTO;
 import org.jahanzaib.personalsite.steam.dto.SteamInfoResponseDTO;
@@ -28,6 +29,7 @@ class SteamEndpointsIT {
   @MockitoBean private SteamInfoService steamInfoService;
 
   private MockMvc mockMvc;
+  @Autowired private ObjectMapper objectMapper;
 
   @BeforeEach
   void setUp() {
@@ -36,15 +38,27 @@ class SteamEndpointsIT {
 
   @Test
   void shouldReturnSteamInfo() throws Exception {
-    var response =
+    var expected =
         SteamInfoResponseDTO.builder()
-            .games(List.of(new SteamInfoGameDTO("Counter-Strike 2", 125, "/730/icon.jpg")))
+            .games(
+                List.of(
+                    SteamInfoGameDTO.builder()
+                        .gameName("Counter-Strike 2")
+                        .playTime(125)
+                        .logoUrlId("/730/icon.jpg")
+                        .build()))
             .build();
-    when(steamInfoService.getSteamInfo()).thenReturn(response);
+    when(steamInfoService.getSteamInfo()).thenReturn(expected);
 
-    mockMvc
-        .perform(get("/steam/info"))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.games[0].gameName").value("Counter-Strike 2"));
+    var response =
+        mockMvc
+            .perform(get("/steam/info"))
+            .andExpect(status().isOk())
+            .andReturn()
+            .getResponse();
+    var actual =
+        objectMapper.readValue(response.getContentAsString(), SteamInfoResponseDTO.class);
+
+    assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
   }
 }

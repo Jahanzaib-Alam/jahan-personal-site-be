@@ -6,9 +6,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import org.jahanzaib.personalsite.prayertimes.entity.PrayerTimes;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 class PrayerTimesDstApplierTest {
-  private final PrayerTimesDstApplier applier = new PrayerTimesDstApplier();
+  @InjectMocks private PrayerTimesDstApplier applier;
 
   @Test
   void shouldApplyOneHourForwardInMarch() {
@@ -28,17 +32,32 @@ class PrayerTimesDstApplierTest {
             .build();
 
     var result = applier.applyDaylightSavings(times, LocalDate.of(2026, 3, 29));
+    var expected =
+        times.toBuilder()
+            .fajrStart(LocalTime.of(6, 0))
+            .sunrise(LocalTime.of(7, 30))
+            .dhuhrStart(LocalTime.of(13, 0))
+            .asrStart(LocalTime.of(16, 0))
+            .maghribStart(LocalTime.of(19, 0))
+            .ishaStart(LocalTime.of(20, 30))
+            .fajrJamat(LocalTime.of(6, 30))
+            .dhuhrJamat(LocalTime.of(14, 0))
+            .asrJamat(LocalTime.of(16, 30))
+            .maghribJamat(LocalTime.of(19, 30))
+            .ishaJamat(LocalTime.of(21, 0))
+            .build();
 
-    assertThat(result.getFajrStart()).isEqualTo(LocalTime.of(6, 0));
+    assertThat(result).usingRecursiveComparison().isEqualTo(expected);
   }
 
   @Test
   void shouldNotChangeTimesOutsideTransitionMonths() {
     var times = PrayerTimes.builder().fajrStart(LocalTime.of(5, 0)).build();
+    var expected = times.toBuilder().build();
 
     var result = applier.applyDaylightSavings(times, LocalDate.of(2026, 7, 10));
 
-    assertThat(result).isSameAs(times);
+    assertThat(result).usingRecursiveComparison().isEqualTo(expected);
   }
 
   @Test
