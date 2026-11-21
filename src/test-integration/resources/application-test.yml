@@ -1,0 +1,22 @@
+spring:
+  sql:
+    init:
+      mode: never
+  datasource:
+    url: jdbc:h2:mem:integrationdb;INIT=CREATE SCHEMA IF NOT EXISTS JAHAN_PERSONAL_SITE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        default_schema: PUBLIC
+    database-platform: org.hibernate.dialect.H2Dialect
+  liquibase:
+    enabled: false
+
+steam:
+  api-key: test
+  user-id: test

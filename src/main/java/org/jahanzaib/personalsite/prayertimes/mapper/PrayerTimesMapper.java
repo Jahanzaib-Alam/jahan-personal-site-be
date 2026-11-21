@@ -54,10 +54,9 @@ public class PrayerTimesMapper {
 
   private Boolean isJamatChanging(Prayer prayer, NamedPrayerTimes otherTimes) {
     return otherTimes.getPrayers().stream()
-        .filter(
-            todayPrayer ->
-                todayPrayer.getName().equals(prayer.getName())
-                    && !prayer.getName().equals(PrayerName.MAGHRIB))
+        .filter(todayPrayer ->
+            todayPrayer.getName().equals(prayer.getName())
+                && !prayer.getName().equals(PrayerName.MAGHRIB))
         .findFirst()
         .map(Prayer::getJamat)
         .map(LocalDateTime::toLocalTime)

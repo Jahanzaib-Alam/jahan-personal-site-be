@@ -25,6 +25,6 @@ public class SteamInfoConverter {
       var infoGame = new SteamInfoGameDTO(game.name(), game.playtime_forever(), imageUrl);
       infoGamesList.add(infoGame);
     }
-    return new SteamInfoResponseDTO(infoGamesList);
+    return SteamInfoResponseDTO.builder().games(infoGamesList).build();
   }
 }

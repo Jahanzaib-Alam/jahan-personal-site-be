@@ -4,6 +4,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.jahanzaib.personalsite.exception.ResourceNotFoundException;
 import org.jahanzaib.personalsite.prayertimes.entity.PrayerTimes;
 import org.jahanzaib.personalsite.prayertimes.enums.PrayerName;
 import org.jahanzaib.personalsite.prayertimes.model.CurrentPrayerTimes;
@@ -35,7 +36,13 @@ public class PrayerTimesService {
 
   public NamedPrayerTimes getTimesForDate(int mosqueId, LocalDate date) {
     var times =
-        applyDst(repository.getByDateAndMosqueId(date.withYear(DEFAULT_YEAR), mosqueId), date);
+        applyDst(
+            repository
+                .findByDateAndMosqueId(date.withYear(DEFAULT_YEAR), mosqueId)
+                .orElseThrow(() ->
+                    new ResourceNotFoundException(
+                        "Prayer times not found for mosque " + mosqueId + " and date " + date)),
+            date);
     return toNamedTimes(times, date);
   }
 
@@ -86,7 +93,11 @@ public class PrayerTimesService {
           .jamat(times.getDhuhrJamat().atDate(date))
           .build();
     }
-    var mosque = mosqueRepository.getById(times.getMosqueId());
+    var mosque =
+        mosqueRepository
+            .findById(times.getMosqueId())
+            .orElseThrow(
+                () -> new ResourceNotFoundException("Mosque not found: " + times.getMosqueId()));
     var fridayJamatTime =
         dstApplier.isDaylightSavings(date) ? mosque.getJumahTimeDst() : mosque.getJumahTime();
     return Prayer.builder()

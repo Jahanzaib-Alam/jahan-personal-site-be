@@ -17,19 +17,22 @@ resilience4j.ratelimiter:
       timeout-duration: ${PRAYER_TIMES_RATE_LIMIT_TIMEOUT_DURATION:0}
 
 steam:
-  api-key: ${STEAM_API_KEY}
-  user-id: ${STEAM_USER_ID}
+  api-key: ${STEAM_API_KEY:}
+  user-id: ${STEAM_USER_ID:}
 
 spring:
+  jmx:
+    enabled: false
   datasource:
-    url: jdbc:postgresql://localhost:5432/production
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/local-db}
     driver-class-name: org.postgresql.Driver
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    username: ${DATABASE_USERNAME:local-user}
+    password: ${DATABASE_PASSWORD:local-password}
   jpa:
     hibernate:
       ddl-auto: none
     show-sql: false
+    open-in-view: false
     properties:
       hibernate:
         format_sql: true
@@ -45,3 +48,17 @@ logging:
     arn: ${LOGGING_SNS_ARN:}
     region: ${LOGGING_SNS_REGION:eu-west-1}
     max-message-length: ${LOGGING_SNS_MAX_MESSAGE_LENGTH:8000}
+
+server:
+  port: ${SERVER_PORT:8081}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+  jmx:
+    enabled: false
