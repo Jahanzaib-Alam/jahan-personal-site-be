@@ -43,14 +43,14 @@ public class AwsLogAppender extends AppenderBase<ILoggingEvent> {
   private String buildMessage(ILoggingEvent event) {
     var messageBuilder =
         new StringBuilder()
-            .append(String.format("Logger: %s\n", event.getLoggerName()))
-            .append(String.format("Thread: %s\n", event.getThreadName()))
-            .append(String.format("Message: %s\n", event.getFormattedMessage()));
+            .append(String.format("Logger: %s%n", event.getLoggerName()))
+            .append(String.format("Thread: %s%n", event.getThreadName()))
+            .append(String.format("Message: %s%n", event.getFormattedMessage()));
 
     var throwableProxy = event.getThrowableProxy();
     if (throwableProxy != null) {
       messageBuilder.append(
-          String.format("\nStacktrace: %s\n", ThrowableProxyUtil.asString(throwableProxy)));
+          String.format("%nStacktrace: %s%n", ThrowableProxyUtil.asString(throwableProxy)));
     }
     var message = messageBuilder.toString();
     if (message.length() > maxMessageLength) {
